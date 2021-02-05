@@ -35,12 +35,15 @@ def main() -> None:
     with tempfile.NamedTemporaryFile(suffix=".res", mode="w", delete=False) as fp:
         fp.write(content)
         fp.close()
-        proc = subprocess.Popen([str(bsc), "-format", fp.name], stdout=subprocess.PIPE)
+        proc = subprocess.Popen(
+            [str(bsc), "-color", "never", "-format", fp.name], stdout=subprocess.PIPE
+        )
         formatted, _ = proc.communicate()
-        formatted_str = formatted.decode("utf-8")
-        if formatted_str != content:
-            res = 0
-            print(formatted_str)
+        if not proc.wait():
+            formatted_str = formatted.decode("utf-8")
+            if formatted_str != content:
+                res = 0
+                print(formatted_str)
         os.unlink(fp.name)
     sys.exit(res)
 
