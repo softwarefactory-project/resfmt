@@ -1,0 +1,9 @@
+- project:
+    check: &ci
+      jobs:
+        - tox-linters:
+            nodeset: python-latest-pod
+    gate: *ci
+    release:
+      jobs:
+        - upload-pypi
