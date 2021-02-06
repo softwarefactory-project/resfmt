@@ -2,8 +2,15 @@
     check: &ci
       jobs:
         - tox-linters:
-            nodeset: python-latest-pod
+            nodeset:
+              nodes:
+                - name: container
+                  label: zuul-worker-python
     gate: *ci
     release:
       jobs:
-        - upload-pypi
+        - upload-pypi:
+            nodeset:
+              nodes:
+                - name: container
+                  label: zuul-worker-python

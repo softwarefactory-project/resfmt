@@ -16,8 +16,10 @@ from setuptools import setup
 
 setup(
     name="resfmt",
-    version="0.1.1",
+    setup_requires=["setuptools_scm"],
     packages=["resfmt"],
+    url="https://softwarefactory-project.io/cgit/software-factory/resfmt",
+    use_scm_version=True,
     description="A ReScript helper for formatter",
     license="ASL v2.0",
     long_description=open("README.md").read(),
